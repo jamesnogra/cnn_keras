@@ -9,3 +9,6 @@
 # Test the Model
 * In the file `test.py` at line 13, there is the image of the file that will be tested. This file can be replaced with an image on the internet. Again, all images must be JPG.
 * To test, run the command `python test.py`.
+
+# Converting the Saved Model to TensorflowJS Type
+* In the command line, run `tensorflowjs_wizard` and answer the questions.
