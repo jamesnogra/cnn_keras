@@ -1,10 +1,16 @@
+// Wait for the elements to load
+$(document).ready(function() {
+	$('#file-input-container').hide()
+	loadModel()
+})
+
 // For getting the model
 let model
 async function loadModel() {
 	model = await tf.loadLayersModel('keras-main-model-js/model.json')
 	predict()
+	$('#file-input-container').show()
 }
-loadModel()
 
 // For preview of image after browse
 function display(input) {
