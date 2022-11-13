@@ -1,5 +1,7 @@
 # Convolutional Neural Network (CNN) Using Keras with Web App
 
+![Web App](web-codes/app.jpg "CNN Web App Preview")
+
 ## Install Required Libraries
  * Run the command `pip install -r requirements.txt`
 
