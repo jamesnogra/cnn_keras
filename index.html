@@ -9,14 +9,34 @@
 	<script src="web-codes/classes.js"></script>
 	<link rel="stylesheet" href="web-codes/bootstrap.css">
 	<style>
-		.result-item-container { margin-top: 5px; font-size: 16px; }
-		.result-label { width: 25%; float: left; }
-		.result-bar { width: 75%; float: left; }
-		.result-bar-color {
-			background-color: #198754;
-			color: #FFFFFF;
+		.result-item-container {
+			margin-top: 5px;
+			font-size: 16px;
+		}
+		.result-label {
+			width: 25%;
+			float: left;
+		}
+		.result-bar {
+			width: 75%;
+			float: left;
+		}
+		.result-bar-value {
+			color: #CCCCCC;
 			border-radius: 5px;
-			position: relative;
+		}
+		#image-preview {
+			width: 240px;
+			height: 240px;
+			margin: auto;
+			background-color: #CCCCCC;
+			border-radius: 5px;
+		}
+		#image-preview img {
+			object-fit: cover;
+			width: 240px;
+			height: 240px;
+			overflow: hidden;
 		}
 	</style>
 </head>
@@ -26,19 +46,15 @@
 	<hr />
 	<h1 class="text-center">Image Classifier</h1>
 	<hr />
-	<div class="text-center">
-		<img src="apple.jpg" id="input-image" style="width:240px;">
+	<div id="image-preview" class="text-center">
+		<img src="default.jpg" id="input-image">
 	</div>
+	<hr />
 	<div>
 		<input type="file" accept="image/*" onchange="display(this)" class="form-control">
 	</div>
 	<hr />
-	<div id="results">
-		<div class="result-item-container">
-			<div class="result-label">Apple</div>
-			<div class="result-bar"><div class="result-bar-color text-center" style="width:90%">90%</div></div>
-		</div>
-	</div>
+	<div id="results"><center><img src="web-codes/loading.gif" /></center></div>
 </div>
 
 </body>

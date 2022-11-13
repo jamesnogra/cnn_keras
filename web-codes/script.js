@@ -1,26 +1,26 @@
 // For getting the model
-let model = undefined
+let model
 async function loadModel() {
 	model = await tf.loadLayersModel('keras-fruits-js/model.json')
+	predict()
 }
 loadModel()
 
 // For preview of image after browse
 function display(input) {
 	if (input.files && input.files[0]) {
-		const reader = new FileReader();
+		const reader = new FileReader()
 		reader.onload = function(e) {
-			$('#input-image').attr('src', e.target.result);
+			$('#input-image').attr('src', e.target.result)
 		}
-		reader.readAsDataURL(input.files[0]);
-		predict()
+		reader.readAsDataURL(input.files[0])
+		// Add a little delay before calling the predict function
+		setTimeout(function() {
+			predict()
+		}, 50)
+		
 	}
 }
-
-$("#filePhoto").change(function() {
-  readURL(this)
-});
-
 // When clicking the predict button
 async function predict() {
 	let input = document.getElementById('input-image')
@@ -29,7 +29,7 @@ async function predict() {
 		.resizeNearestNeighbor([128, 128])
 		.div(tf.scalar(255))
 		.expandDims(0)
-	const pred = model.predict(step1).arraySync()
+	const pred = await model.predict(step1).arraySync()
 	const prob = tf.softmax(pred).arraySync()[0]
 	displayResult(prob)
 }
@@ -42,7 +42,9 @@ function displayResult(prob) {
 		htmlStr += '\
 			<div class="result-item-container"> \
 				<div class="result-label">' + allClasses[x] + '</div> \
-				<div class="result-bar">' + percentDisplay + '%<div class="result-bar-color text-center" style="width:' + percentDisplay + '%"></div></div> \
+				<div class="result-bar"> \
+					<div class="result-bar-value text-center" style="background: linear-gradient(90deg, #198754 ' + percentDisplay + '%, #FFFFFF ' + percentDisplay + '%);">' + percentDisplay + '%</div> \
+				</div> \
 			</div> \
 		';
 	}
