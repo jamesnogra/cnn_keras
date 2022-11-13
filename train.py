@@ -15,7 +15,7 @@ IMAGE_CHANNELS = 3
 FIRST_NUM_CHANNEL = 32
 FILTER_SIZE = 3
 PERCENT_TRAINING_DATA = 80
-NUM_EPOCHS = 15
+NUM_EPOCHS = 25
 MODEL_NAME = 'keras-fruits'
 
 def define_classes():
@@ -78,8 +78,10 @@ model.add(layers.MaxPooling2D((FILTER_SIZE, FILTER_SIZE)))
 model.add(layers.Conv2D(FIRST_NUM_CHANNEL*2, (FILTER_SIZE, FILTER_SIZE), activation='relu'))
 model.add(layers.MaxPooling2D((FILTER_SIZE, FILTER_SIZE)))
 model.add(layers.Conv2D(FIRST_NUM_CHANNEL*4, (FILTER_SIZE, FILTER_SIZE), activation='relu'))
+model.add(layers.MaxPooling2D((FILTER_SIZE, FILTER_SIZE)))
+model.add(layers.Conv2D(FIRST_NUM_CHANNEL*8, (FILTER_SIZE, FILTER_SIZE), activation='relu'))
 model.add(layers.Flatten())
-model.add(layers.Dense(FIRST_NUM_CHANNEL*8, activation='relu'))
+model.add(layers.Dense(FIRST_NUM_CHANNEL*16, activation='relu'))
 model.add(layers.Dropout(0.2))
 model.add(layers.Dense(NUM_OUTPUT))
 model.summary()
@@ -109,3 +111,12 @@ plt.show()
 
 # Save model
 model.save(MODEL_NAME)
+
+# Write classes to js inside web-codes
+# This will be used for tensorflowjs at index.html
+f = open('web-codes/classes.js', 'w')
+all_classes_str = ''
+for class_label in all_classes:
+	all_classes_str += '"' + class_label + '",'
+f.write('const allClasses = [' + all_classes_str + ']')
+f.close()

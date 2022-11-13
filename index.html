@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Classifier</title>
+	<script src="web-codes/tfjs.js"></script>
+	<script src="web-codes/jquery.js"></script>
+	<script src="web-codes/script.js"></script>
+	<script src="web-codes/classes.js"></script>
+	<link rel="stylesheet" href="web-codes/bootstrap.css">
+</head>
+<body>
+
+<h1 class="text-center">Image Classifier</h1>
+<div class="text-center">
+	<img src="apple.jpg" id="input-image" style="width:240px;">
+</div>
+<div id="uploadFile" class="custombutton">
+	<input type="file" accept="image/*" onchange="display(this)" class="form-control">
+	<input type="button" name="predict" onclick="predict()" value="Predict" class="form-control btn btn-success">
+</div>
+</body>
+</html>
