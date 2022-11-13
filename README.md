@@ -10,5 +10,11 @@
 * In the file `test.py` at line 13, there is the image of the file that will be tested. This file can be replaced with an image on the internet. Again, all images must be JPG.
 * To test, run the command `python test.py`.
 
-# Converting the Saved Model to TensorflowJS Type
-* In the command line, run `tensorflowjs_wizard` and answer the questions.
+# Deploying to a XAMPP for Windows
+* Download XAMPP.
+* Move or copy the entire project directory to `C:\xampp\htdocs\cnn_keras`.
+* Make sure Apache service of XAMPP is running.
+* Then in the browser, open `http://localhost/cnn_keras`.
+
+# (Optional) Deploying to a Web Server
+* After training and testing the model, move the entire project directory to a web server such as Amazon EC2 or Digital Ocean Droplet.

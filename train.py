@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 # Keras
 from tensorflow.keras import datasets, layers, models
+import tensorflowjs as tfjs
 
 TRAIN_DIR = 'train'
 IMG_SIZE = 128
@@ -16,7 +17,7 @@ FIRST_NUM_CHANNEL = 32
 FILTER_SIZE = 3
 PERCENT_TRAINING_DATA = 80
 NUM_EPOCHS = 25
-MODEL_NAME = 'keras-fruits'
+MODEL_NAME = 'keras-main-model'
 
 def define_classes():
 	all_classes = []
@@ -111,6 +112,7 @@ plt.show()
 
 # Save model
 model.save(MODEL_NAME)
+tfjs.converters.save_keras_model(model, MODEL_NAME + '-js')
 
 # Write classes to js inside web-codes
 # This will be used for tensorflowjs at index.html

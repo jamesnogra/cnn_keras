@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 from tensorflow import keras
 
-TEST_IMG = 'apple.jpg'
+TEST_IMG = 'default.jpg'
 
 TRAIN_DIR = 'train'
 IMG_SIZE = 128
@@ -19,7 +19,7 @@ FIRST_NUM_CHANNEL = 32
 FILTER_SIZE = 3
 PERCENT_TRAINING_DATA = 80
 NUM_EPOCHS = 15
-MODEL_NAME = 'keras-fruits'
+MODEL_NAME = 'keras-main-model'
 
 def define_classes():
 	all_classes = []

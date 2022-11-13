@@ -1,7 +1,7 @@
 // For getting the model
 let model
 async function loadModel() {
-	model = await tf.loadLayersModel('keras-fruits-js/model.json')
+	model = await tf.loadLayersModel('keras-main-model-js/model.json')
 	predict()
 }
 loadModel()
