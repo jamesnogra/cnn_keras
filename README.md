@@ -1,4 +1,5 @@
 # Convolutional Neural Network (CNN) Using Keras with Web App
+You can try a demo at http://142.47.94.172/cnn_keras/.
 
 ![Web App](web-codes/app.jpg "CNN Web App Preview")
 
