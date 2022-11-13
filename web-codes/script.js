@@ -13,11 +13,12 @@ function display(input) {
 			$('#input-image').attr('src', e.target.result);
 		}
 		reader.readAsDataURL(input.files[0]);
+		predict()
 	}
 }
 
 $("#filePhoto").change(function() {
-  readURL(this);
+  readURL(this)
 });
 
 // When clicking the predict button
@@ -35,5 +36,15 @@ async function predict() {
 
 // Display the result
 function displayResult(prob) {
-	console.log(prob)
+	let htmlStr = '';
+	for (let x=0; x<prob.length; x++) {
+		const percentDisplay = (prob[x] * 100).toFixed(1);
+		htmlStr += '\
+			<div class="result-item-container"> \
+				<div class="result-label">' + allClasses[x] + '</div> \
+				<div class="result-bar">' + percentDisplay + '%<div class="result-bar-color text-center" style="width:' + percentDisplay + '%"></div></div> \
+			</div> \
+		';
+	}
+	$('#results').html(htmlStr)
 }
