@@ -1,3 +1,6 @@
+// Maximum number of result of classes to show
+const MAX_CLASS_TO_DISPLAY = 5
+
 // Wait for the elements to load
 $(document).ready(function() {
 	$('#file-input-container').hide()
@@ -42,17 +45,38 @@ async function predict() {
 
 // Display the result
 function displayResult(prob) {
-	let htmlStr = '';
-	for (let x=0; x<prob.length; x++) {
-		const percentDisplay = (prob[x] * 100).toFixed(1);
+	let htmlStr = ''
+	let displayCounter = 0, maxToDisplay = MAX_CLASS_TO_DISPLAY
+	const newResult = matchProbabilityAndClasses(prob)
+	for (const key in newResult) {
+		const percentDisplay = (newResult[key] * 100).toFixed(1)
 		htmlStr += '\
 			<div class="result-item-container"> \
-				<div class="result-label">' + allClasses[x] + '</div> \
+				<div class="result-label">' + key + '</div> \
 				<div class="result-bar"> \
 					<div class="result-bar-value text-center" style="background: linear-gradient(90deg, #198754 ' + percentDisplay + '%, #FFFFFF ' + percentDisplay + '%);">' + percentDisplay + '%</div> \
 				</div> \
 			</div> \
-		';
+		'
+		displayCounter++
+		if (displayCounter >= maxToDisplay) {
+			break
+		}
 	}
 	$('#results').html(htmlStr)
+}
+
+// Match probability with all classes
+function matchProbabilityAndClasses(prob) {
+	const allProbData = []
+	for (let x=0; x<prob.length; x++) {
+		allProbData[allClasses[x]] = prob[x]
+	}
+	return sortObjectbyValue(allProbData, false)
+}
+
+function sortObjectbyValue(obj={},asc=true){ 
+	const ret = {}
+	Object.keys(obj).sort((a,b) => obj[asc?a:b]-obj[asc?b:a]).forEach(s => ret[s] = obj[s])
+	return ret
 }
