@@ -16,7 +16,7 @@ IMAGE_CHANNELS = 3
 FIRST_NUM_CHANNEL = 32
 FILTER_SIZE = 3
 PERCENT_TRAINING_DATA = 80
-NUM_EPOCHS = 50
+NUM_EPOCHS = 25
 MODEL_NAME = 'keras-main-model'
 
 def define_classes():
@@ -77,11 +77,13 @@ plt.clf()
 model = models.Sequential()
 model.add(layers.Conv2D(FIRST_NUM_CHANNEL, (FILTER_SIZE, FILTER_SIZE), activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 3)))
 model.add(layers.MaxPooling2D((FILTER_SIZE, FILTER_SIZE)))
+model.add(layers.Dropout(0.2))
 model.add(layers.Conv2D(FIRST_NUM_CHANNEL*2, (FILTER_SIZE, FILTER_SIZE), activation='relu'))
 model.add(layers.MaxPooling2D((FILTER_SIZE, FILTER_SIZE)))
+model.add(layers.Dropout(0.2))
 model.add(layers.Conv2D(FIRST_NUM_CHANNEL*4, (FILTER_SIZE, FILTER_SIZE), activation='relu'))
 model.add(layers.MaxPooling2D((FILTER_SIZE, FILTER_SIZE)))
-model.add(layers.Conv2D(FIRST_NUM_CHANNEL*8, (FILTER_SIZE, FILTER_SIZE), activation='relu'))
+model.add(layers.Dropout(0.2))
 model.add(layers.Flatten())
 model.add(layers.Dense(FIRST_NUM_CHANNEL*32, activation='relu'))
 model.add(layers.Dropout(0.2))
