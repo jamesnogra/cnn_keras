@@ -1,1 +1,1 @@
-const allClasses = ["apples","dragon fruit","grapes","oranges",]
+const allClasses = ["apple","banana","dragon fruit","grapes","jackfruit","lemon","mango","orange","passion fruit","sugar apple",]

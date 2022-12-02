@@ -16,7 +16,7 @@ IMAGE_CHANNELS = 3
 FIRST_NUM_CHANNEL = 32
 FILTER_SIZE = 3
 PERCENT_TRAINING_DATA = 80
-NUM_EPOCHS = 25
+NUM_EPOCHS = 50
 MODEL_NAME = 'keras-main-model'
 
 def define_classes():
@@ -59,7 +59,7 @@ test_labels = np.array([i[1] for i in test])
 # Normalize pixel values to be between 0 and 1
 train_images, test_images = train_images / 255.0, test_images / 255.0
 
-'''# Plot 25 images
+# Plot 25 images
 plt.figure(figsize=(10,10))
 for i in range(25):
     plt.subplot(5,5,i+1)
@@ -70,7 +70,8 @@ for i in range(25):
     # The labels happen to be arrays, 
     # which is why you need the extra index
     plt.xlabel(all_classes[train_labels[i][0]])
-#.show()'''
+plt.savefig('training-log-images/sample_images.png')
+plt.clf()
 
 # Make the model
 model = models.Sequential()
@@ -82,7 +83,7 @@ model.add(layers.Conv2D(FIRST_NUM_CHANNEL*4, (FILTER_SIZE, FILTER_SIZE), activat
 model.add(layers.MaxPooling2D((FILTER_SIZE, FILTER_SIZE)))
 model.add(layers.Conv2D(FIRST_NUM_CHANNEL*8, (FILTER_SIZE, FILTER_SIZE), activation='relu'))
 model.add(layers.Flatten())
-model.add(layers.Dense(FIRST_NUM_CHANNEL*16, activation='relu'))
+model.add(layers.Dense(FIRST_NUM_CHANNEL*32, activation='relu'))
 model.add(layers.Dropout(0.2))
 model.add(layers.Dense(NUM_OUTPUT))
 model.summary()
@@ -97,7 +98,8 @@ history = model.fit(
 	train_images,
 	train_labels,
 	epochs=NUM_EPOCHS, 
-	validation_data=(test_images, test_labels)
+	validation_data=(test_images, test_labels),
+	batch_size=16
 )
 
 # Evaluate the model
@@ -105,10 +107,11 @@ plt.plot(history.history['accuracy'], label='accuracy')
 plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
-plt.ylim([0.5, 1])
+plt.ylim([1/NUM_OUTPUT, 1])
 plt.legend(loc='lower right')
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
-plt.show()
+plt.savefig('training-log-images/model_accuracy.png')
+plt.clf()
 
 # Save model
 model.save(MODEL_NAME)
